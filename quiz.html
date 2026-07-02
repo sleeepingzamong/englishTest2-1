@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>퀴즈</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="quiz-head">
+      <a href="index.html" class="back">← 본문 선택</a>
+      <h1 id="quiz-title">퀴즈</h1>
+      <p id="quiz-subtitle" class="sub"></p>
+    </header>
+
+    <details class="passage-box">
+      <summary>📖 본문 다시 보기</summary>
+      <div id="passage-text"></div>
+    </details>
+
+    <form id="quiz-form"></form>
+
+    <div class="actions">
+      <button id="submit-btn" type="button" class="btn primary">채점하기</button>
+      <button id="retry-btn" type="button" class="btn" style="display:none;">다시 풀기</button>
+    </div>
+
+    <div id="result" class="result" style="display:none;"></div>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

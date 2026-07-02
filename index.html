@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>영어 본문 퀴즈</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="hero">
+      <h1>📘 영어 시험 본문 퀴즈</h1>
+      <p class="sub">공부할 본문을 골라 퀴즈를 풀어보세요.</p>
+    </header>
+
+    <section id="passage-list" class="card-grid">
+      <!-- data.js 기반으로 자동 생성 -->
+    </section>
+
+    <footer class="foot">
+      <p>빈칸 문제 70% · 내용 문제 30%</p>
+    </footer>
+  </main>
+
+  <script src="data.js"></script>
+  <script>
+    const list = document.getElementById("passage-list");
+
+    passages.forEach((p) => {
+      const blanks = p.questions.filter(q => q.type === "blank").length;
+      const contents = p.questions.filter(q => q.type === "content").length;
+
+      const a = document.createElement("a");
+      a.className = "passage-card";
+      a.href = `quiz.html?passage=${p.id}`;
+      a.innerHTML = `
+        <div class="badge">${p.title}</div>
+        <h2>${p.subtitle}</h2>
+        <div class="meta">
+          <span>총 ${p.questions.length}문제</span>
+          <span>빈칸 ${blanks} · 내용 ${contents}</span>
+        </div>
+        <div class="go">퀴즈 풀기 →</div>
+      `;
+      list.appendChild(a);
+    });
+
+    // 아직 추가되지 않은 본문 자리 표시 (본문 2, 3)
+    const existing = passages.map(p => p.id);
+    [2, 3].forEach((id) => {
+      if (existing.includes(id)) return;
+      const div = document.createElement("div");
+      div.className = "passage-card disabled";
+      div.innerHTML = `
+        <div class="badge">본문 ${id}</div>
+        <h2>아직 추가되지 않았어요</h2>
+        <div class="meta"><span>본문을 보내주면 추가됩니다</span></div>
+        <div class="go muted">준비 중</div>
+      `;
+      list.appendChild(div);
+    });
+  </script>
+</body>
+</html>
